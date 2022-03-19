@@ -81,12 +81,14 @@ class system2d:
             star.v[0] = star.v0
             star.r[0] = star.r0
             
-            Fourpi2 = 4*np.pi*np.pi
+            G = 6.674e-11/(1.495978707e11)**3
+            M = 1.989e30*4e6
             for i in range(n-1):
                 rabs = np.sqrt(sum(star.r[i]*star.r[i]))
-                a =  -Fourpi2*star.r[i]/(rabs**3)
+                a = G*M*star.r[i]/(rabs**3)
                 star.r[i+1] = star.r[i] + dt*star.v[i] + dt**2/2*a
-                a_new = -Fourpi2*star.r[i+1]/(rabs**3)
+                rabs_new = np.sqrt(sum(star.r[i+1]*star.r[i+1]))
+                a_new = G*M*star.r[i+1]/(rabs_new**3)
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
                 
     def plot(self, star_list, i, xlim, ylim):
@@ -140,7 +142,7 @@ class system3d:
                 a_new = -Fourpi2*star.r[i+1]/(rabs**3)
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)        
 
-    def plot(self, star_list, i, xlim, ylim):
+    def plot(self, i, xlim, ylim,zlim):
         '''
         Plots the positions of the stars at a specified point in time
         
@@ -162,12 +164,13 @@ class system3d:
         '''
         fig = plt.figure()
         ax = plt.axes(projection='3d')
-        for star in star_list:
+        for star in self.star_list:
             fig = plt.figure()
             ax = plt.axes(projection='3d')
-            ax.scatter(star.r[i,0],star.r[i,1],star.r[i,2])
+            ax.scatter(star.r[:,0],star.r[:,1],star.r[:,2])
             ax.set_xlim(xlim)
             ax.set_ylim(ylim)
+#             ax.set_z_lim(zlim)
         
         
         
