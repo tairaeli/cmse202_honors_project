@@ -19,9 +19,9 @@ class star:
     '''
     
     def __init__(self, r0, v0):
-        
+
 #         self.mass = mass # might not need since black hole is so massive
-        
+
         self.r0 = r0
         
         self.v0 = v0
@@ -113,8 +113,8 @@ class system2d:
             plt.scatter(star.r[i,0],star.r[i,1])
             plt.xlim(xlim)
             plt.ylim(ylim)
-            
-            
+
+
 class system3d:
     
     def __init__(self,star_list):
@@ -168,8 +168,8 @@ class system3d:
             ax.scatter(star.r[i,0],star.r[i,1],star.r[i,2])
             ax.set_xlim(xlim)
             ax.set_ylim(ylim)
+
         
+
         
-        
-        
-        
+
