@@ -72,9 +72,6 @@ class system2d:
                 take longer to run
         '''
         
-        bound_x = 0
-        bound_y = 0
-        
         for star in self.star_list:
             #set up arrays 
             n = int(tfinal/dt)
@@ -118,6 +115,61 @@ class system2d:
             plt.ylim(ylim)
             
             
+class system3d:
+    
+    def __init__(self,star_list):
+        
+        self.star_list = star_list
+    
+    def iterate(self,tfinal,dt):
+        
+        for star in self.star_list:
+            #set up arrays 
+            n = int(tfinal/dt)
+            star.v = np.zeros((n,3))
+            star.r = np.zeros((n,3))
             
+            star.v[0] = star.v0
+            star.r[0] = star.r0
+            
+            Fourpi2 = 4*np.pi*np.pi
+            for i in range(n-1):
+                rabs = np.sqrt(sum(star.r[i]*star.r[i]))
+                a =  -Fourpi2*star.r[i]/(rabs**3)
+                star.r[i+1] = star.r[i] + dt*star.v[i] + dt**2/2*a
+                a_new = -Fourpi2*star.r[i+1]/(rabs**3)
+                star.v[i+1] = star.v[i] + dt/2*(a_new+a)        
+
+    def plot(self, star_list, i, xlim, ylim):
+        '''
+        Plots the positions of the stars at a specified point in time
+        
+        arguments:
+        
+            star_list : star
+                list of star objects
+            
+            i : int
+                which indecy from the position arrays will be plotted
+            
+            ### Is there a better way to do this? ###
+            
+            xlim: list
+                the x bounds of the plot 
+            
+            ylim: list
+                the y bounds of the plot
+        '''
+        fig = plt.figure()
+        ax = plt.axes(projection='3d')
+        for star in star_list:
+            fig = plt.figure()
+            ax = plt.axes(projection='3d')
+            ax.scatter(star.r[i,0],star.r[i,1],star.r[i,2])
+            ax.set_xlim(xlim)
+            ax.set_ylim(ylim)
+        
+        
+        
         
         
