@@ -26,10 +26,8 @@ class star:
         
         self.v0 = v0
         
-        self.r = None
+        self.pos = None
         
-        self.v = None
-
 
 class system2d:
     '''
@@ -51,9 +49,10 @@ class system2d:
     
     '''
     
-    def __init__(self, star_list):
+    def __init__(self, star_list, M):
         
         self.star_list = star_list
+        self.M = M
     
     def iterate(self,tfinal,dt):
         '''
@@ -75,21 +74,23 @@ class system2d:
         for star in self.star_list:
             #set up arrays 
             n = int(tfinal/dt)
+            
             star.v = np.zeros((n,2))
             star.r = np.zeros((n,2))
             
             star.v[0] = star.v0
             star.r[0] = star.r0
             
-            G = 6.674e-11
-            M = 1.989e30*4e6
+            G = 6.67e-11
+            
             for i in range(n-1):
-                rabs = np.sqrt(sum(star.r[i]*star.r[i]))
-                a = -G*M*star.r[i]/(rabs**3)
+                rabs = np.sqrt(sum(star.r[i]*star.r[i])) 
+                a = -G*self.M/(rabs**3)*star.r[i]
                 star.r[i+1] = star.r[i] + dt*star.v[i] + dt**2/2*a
-                rabs_new = np.sqrt(sum(star.r[i+1]*star.r[i+1]))
-                a_new = -G*M*star.r[i+1]/(rabs_new**3)
+#                 rabs_new = np.sqrt(sum(star.r[i+1]*star.r[i+1])) 
+                a_new = -G*self.M/(rabs**3)*star.r[i+1]
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
+                
                 
     def plot(self, star_list, i, xlim, ylim):
         '''
