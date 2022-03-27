@@ -87,8 +87,8 @@ class system2d:
                 rabs = np.sqrt(sum(star.r[i]*star.r[i])) 
                 a = -G*self.M/(rabs**3)*star.r[i]
                 star.r[i+1] = star.r[i] + dt*star.v[i] + dt**2/2*a
-#                 rabs_new = np.sqrt(sum(star.r[i+1]*star.r[i+1])) 
-                a_new = -G*self.M/(rabs**3)*star.r[i+1]
+                rabs_new = np.sqrt(sum(star.r[i+1]*star.r[i+1])) 
+                a_new = -G*self.M/(rabs_new**3)*star.r[i+1]
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
                 
                 
