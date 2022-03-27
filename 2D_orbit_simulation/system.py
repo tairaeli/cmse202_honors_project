@@ -19,17 +19,15 @@ class star:
     '''
     
     def __init__(self, r0, v0):
-
+        
 #         self.mass = mass # might not need since black hole is so massive
-
+        
         self.r0 = r0
         
         self.v0 = v0
         
-        self.r = None
+        self.pos = None
         
-        self.v = None
-
 
 class system2d:
     '''
@@ -51,9 +49,10 @@ class system2d:
     
     '''
     
-    def __init__(self, star_list):
+    def __init__(self, star_list, M):
         
         self.star_list = star_list
+        self.M = M
     
     def iterate(self,tfinal,dt):
         '''
@@ -75,19 +74,23 @@ class system2d:
         for star in self.star_list:
             #set up arrays 
             n = int(tfinal/dt)
+            
             star.v = np.zeros((n,2))
             star.r = np.zeros((n,2))
             
             star.v[0] = star.v0
             star.r[0] = star.r0
             
-            Fourpi2 = 4*np.pi*np.pi
+            G = 6.67e-11
+            
             for i in range(n-1):
-                rabs = np.sqrt(sum(star.r[i]*star.r[i]))
-                a =  -Fourpi2*star.r[i]/(rabs**3)
+                rabs = np.sqrt(sum(star.r[i]*star.r[i])) 
+                a = -G*self.M/(rabs**3)*star.r[i]
                 star.r[i+1] = star.r[i] + dt*star.v[i] + dt**2/2*a
-                a_new = -Fourpi2*star.r[i+1]/(rabs**3)
+#                 rabs_new = np.sqrt(sum(star.r[i+1]*star.r[i+1])) 
+                a_new = -G*self.M/(rabs**3)*star.r[i+1]
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
+                
                 
     def plot(self, star_list, i, xlim, ylim):
         '''
@@ -113,8 +116,8 @@ class system2d:
             plt.scatter(star.r[i,0],star.r[i,1])
             plt.xlim(xlim)
             plt.ylim(ylim)
-
-
+            
+            
 class system3d:
     
     def __init__(self,star_list):
@@ -140,7 +143,7 @@ class system3d:
                 a_new = -Fourpi2*star.r[i+1]/(rabs**3)
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)        
 
-    def plot(self, star_list, i, xlim, ylim):
+    def plot(self, i, xlim, ylim,zlim):
         '''
         Plots the positions of the stars at a specified point in time
         
@@ -162,14 +165,15 @@ class system3d:
         '''
         fig = plt.figure()
         ax = plt.axes(projection='3d')
-        for star in star_list:
+        for star in self.star_list:
             fig = plt.figure()
             ax = plt.axes(projection='3d')
-            ax.scatter(star.r[i,0],star.r[i,1],star.r[i,2])
+            ax.scatter(star.r[:,0],star.r[:,1],star.r[:,2])
             ax.set_xlim(xlim)
             ax.set_ylim(ylim)
-
+#             ax.set_z_lim(zlim)
         
-
         
-
+        
+        
+        
