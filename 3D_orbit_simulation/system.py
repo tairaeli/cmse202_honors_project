@@ -21,14 +21,14 @@ class star:
         v: list of velocities stored inside of object
     '''
     
-    def __init__(self, r0, v0):
+    def __init__(self, r0, v0, i = 0):
             self.r0 = r0
         
             self.v0 = v0
         
             self.pos = None
-
-#         self.mass = mass # might not need since black hole is so massive
+            
+            self.i = i
 
 class system2d:
     '''
@@ -163,8 +163,7 @@ class system3d:
                 rabs_new = np.sqrt(sum(star.r[i+1]*star.r[i+1])) 
                 a_new = -G*self.M/(rabs_new**3)*star.r[i+1]
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
-                
-
+            
     def plot(self, xlim, ylim, zlim):
         '''
         Plots the positions of the stars at a specified point in time
