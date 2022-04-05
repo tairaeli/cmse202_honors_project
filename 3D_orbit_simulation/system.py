@@ -10,11 +10,9 @@ class star:
     
     attributes:
         
-        r0: Initial position from central "black hole" in AU (1.496e+11 meters)
+        r0: Initial position from central "black hole" in meters
         
-        v0: Initial velocity in AU/s
-        
-        ### Is there a better way of doing this? ###
+        v0: Initial velocity in m/s
         
         r: list of positions stored inside of object
         
@@ -105,8 +103,6 @@ class system2d:
             i : int
                 which indecy from the position arrays will be plotted
             
-            ### Is there a better way to do this? ###
-            
             xlim: list
                 the x bounds of the plot 
             
@@ -129,9 +125,9 @@ class system3d:
     
     def iterate(self,tfinal,dt):
         '''
-        Stolen from PHY321, uses the the Velocity - Verlet method
-        to propagate the motion of the stars as they orbit around the central mass.
-        Stores position and velocity values inside of the star objects
+        Uses the Velocity - Verlet iterative method to propagate the motion of the 
+        stars as they orbit around the central mass. Stores position and velocity 
+        values inside of the star objects
         
         arguments:
             
