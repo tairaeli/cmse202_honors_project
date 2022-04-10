@@ -91,7 +91,7 @@ class system2d:
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
                 
                 
-    def plot(self, star_list, i, xlim, ylim):
+    def plot(self, xlim, ylim):
         '''
         Plots the positions of the stars at a specified point in time
         
@@ -100,19 +100,35 @@ class system2d:
             star_list : star
                 list of star objects
             
-            i : int
-                which indecy from the position arrays will be plotted
-            
             xlim: list
                 the x bounds of the plot 
             
             ylim: list
                 the y bounds of the plot
         '''
-        for star in star_list:
-            plt.scatter(star.r[i,0],star.r[i,1])
-            plt.xlim(xlim)
-            plt.ylim(ylim)
+        fig = plt.figure()
+        ax = plt.axes()
+
+        tf = 100
+        dt = 0.001
+
+        n = np.arange(0,tf*1/dt,50)
+        
+        for i in n:
+            for star in self.star_list:
+                ax.scatter(star.r[int(i), 0], star.r[int(i), 1])
+            ax.scatter(0,0,color = "black", marker = "o")
+                
+            ax.set_xlim([-xlim,xlim])
+            ax.set_ylim([-ylim,ylim])
+            
+            display(fig)
+
+            time.sleep(0.25)
+
+            plt.cla()
+
+            clear_output(wait=True) 
 
 
 class system3d:
