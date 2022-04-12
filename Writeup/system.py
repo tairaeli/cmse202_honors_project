@@ -14,19 +14,21 @@ class star:
         
         v0: Initial velocity in m/s
         
-        r: list of positions stored inside of object
+        r: list of positions stored inside of object, becomes defined in the 
+           iterate() method
         
-        v: list of velocities stored inside of object
+        v: list of velocities stored inside of object, becomes defined in the 
+           iterate() method
     '''
     
-    def __init__(self, r0, v0, i = 0):
+    def __init__(self, r0, v0):
             self.r0 = r0
         
             self.v0 = v0
         
-            self.pos = None
+            self.r = None
             
-            self.i = i
+            self.v = None
 
 class system2d:
     '''
@@ -40,11 +42,12 @@ class system2d:
     methods:
         
         iterate : 
-            Code I stole from PHY321, uses a method known as the Velocity - Verlet method
-            to propagate the motion of the stars as they orbit around the central mass
+            Uses a method known as the Velocity - Verlet method to propagate 
+            the motion of the stars as they orbit around the central mass
         
         plot : 
-            Plots the positions of the stars at a specified point in time
+            Plots an animation of the star's motion defined in the iterate()
+            method
     
     '''
     
