@@ -145,7 +145,7 @@ class system2d:
         
         self.dis=np.linspace(disi,disf,1000)
         
-        self.EV = np.sqrt(G*self.M/self.dis)
+        self.EV = np.sqrt(2*G*self.M/self.dis)
         plt.plot(self.dis,self.EV)
         plt.title("Escape velocity as a function of distance| Mass= "+str(self.M),y=1.05)
         plt.ylabel("Escape Velocity (m/s)")
