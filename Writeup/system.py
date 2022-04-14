@@ -54,8 +54,7 @@ class system2d:
     
     '''
     
-    def __init__(self, star_list, M):
-        
+    def __init__(self, star_list, M):  
         self.star_list = star_list
         self.M = M
     
@@ -96,7 +95,8 @@ class system2d:
                 a_new = -G*self.M/(rabs_new**3)*star.r[i+1]
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
                 
-                
+            print("Data Instantiation Finished")
+            
     def plot(self, xlim, ylim, tf, dt):
         '''
         Plots out the paths of each star oject as a 2d animation
@@ -164,7 +164,10 @@ class system3d:
             the star objects
         
     ''' 
-    
+    def __init__(self, star_list, M):
+        self.star_list = star_list
+        self.M = M
+        
     def iterate(self,tfinal,dt):
         '''
         Uses the Velocity - Verlet iterative method to propagate the motion of the 
@@ -201,6 +204,8 @@ class system3d:
                 rabs_new = np.sqrt(sum(star.r[i+1]*star.r[i+1])) 
                 a_new = -G*self.M/(rabs_new**3)*star.r[i+1]
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
+                
+        print("Data Instantiation Finished")
             
     def plot(self, xlim, ylim, zlim, tf, dt):
         '''
@@ -240,13 +245,8 @@ class system3d:
             
             display(fig)
 
-            time.sleep(0.25)
+            time.sleep(0.00001)
 
             plt.cla()
 
             clear_output(wait=True) 
-
-
-
-
-

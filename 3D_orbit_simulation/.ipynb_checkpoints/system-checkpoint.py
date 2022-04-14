@@ -195,13 +195,8 @@ class system3d:
             
             display(fig)
 
-            time.sleep(0.001)
+            time.sleep(0.00001)
 
             plt.cla()
 
             clear_output(wait=True) 
-
-
-
-
-

@@ -144,7 +144,7 @@ class system3d:
                 a_new = -Fourpi2*star.r[i+1]/(rabs**3)
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)        
 
-    def plot(self, xlim, ylim, zlim):
+    def plot(self, xlim, ylim, zlim, tf, dt):
         '''
         Plots the positions of the stars at a specified point in time
         
@@ -167,22 +167,19 @@ class system3d:
         fig = plt.figure()
         ax = plt.axes(projection='3d')
 
-        tf = 100
-        dt = 0.001
-
-        n = np.arange(0,tf*1/dt,50)
+        n = int(tf/dt)
         
-        for i in n:
+        for i in range(n):
             for star in self.star_list:
                 ax.scatter3D(star.r[int(i), 0], star.r[int(i), 1], star.r[int(i), 2])
                 
-            ax.set_xlim([-5,5])
-            ax.set_ylim([-5,5])
-            ax.set_zlim([-5,5])
+            ax.set_xlim(xlim)
+            ax.set_ylim(ylim)
+            ax.set_zlim(zlim)
             
             display(fig)
 
-            time.sleep(0.25)
+            time.sleep(0.001)
 
             plt.cla()
 
