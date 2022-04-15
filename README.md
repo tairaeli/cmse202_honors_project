@@ -40,3 +40,19 @@ import matplotlib.pyplot as plt
 %autoreload 2
 from system import star, system2d
 ```
+
+Now we are able to run our basic simulation.
+
+```
+plt.figure(figsize = (8,8))
+plt.plot(test_star.r[:,0],test_star.r[:,1], label = "Star Orbit")
+plt.scatter(0,0, color = "black", marker = "o", label = "Black Hole")
+plt.xlabel("X Position (m)")
+plt.ylabel("Y Position (m)")
+plt.title("Simple Stellar Orbit in 2D")
+plt.legend()
+```
+
+This should output a plot that is something like:
+
+![](./images/exposplot2d.jpg)
