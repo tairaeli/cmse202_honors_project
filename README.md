@@ -55,4 +55,4 @@ plt.legend()
 
 This should output a plot that is something like:
 
-![](./images/exposplot2d.jpg)
+![](./images/exposplot.jpg)
