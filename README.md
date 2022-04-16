@@ -64,7 +64,9 @@ The residual for s14 is 203400.93013891205
 The residual for s16 is 233799.77611472458
 The residual for s4714 is 205759.93473405018
 ```
-If the value is positive it means it doesnt follow newtonian mechanics and shouldnt be plotted whe plotting our model.
+If the value is positive it means that the star does not follow Newtonian Mechanics and will therefore not be applicable to our model.
+
+Looking at the escape velocities, we find that stars: s14, s16 and s4714 are not applicable for our model, so we will not be including them in our analysis.
 
 ### 2D Model
 
