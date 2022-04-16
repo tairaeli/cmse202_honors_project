@@ -6,7 +6,8 @@ Arian Andalib, Nate Gu, Elias Taira
 
 While Sagittarius A (Sag A for short) has been observed many times and have been confirmed to be the center of our galaxy since as early as the 1980's, it wasn't until the 2000s that this "star" was confirmed to be a black hole. Even more recently, we have been able to observe the orbits of stars very close to the black hole. Then, using Kepler's Laws to map out the orbital path of the stars, obtain an accurate reading of what the mass of this black hole is.
 
-![](./images/Galactic_centre_orbits.svg.png)
+<img src="https://github.com/tairaeli/cmse202_honors_project/blob/master/images/Galactic_centre_orbits.svg.png" width="400" height="500">
+
 
 After a careful analysis of the astronomical data, it was found that the bleck hole weighs around $3.6^{+0.2}_{-0.4}*10^6 M_\odot$ 
 
@@ -66,13 +67,15 @@ test_system = system2d(test_list,black_hole_mass) # creates a 2d system object u
 
 ```
 
+Now it is finally time to put our planet into orbit. We will now run the '.iterate()' method to iterate through our Velocity-Verlet method to output the positions and velocities of each of the stars within the system (but in this case, we're only using 1 star). For this step, we only need two arguments: the length of time we will iterate for, denoted by tf, and the amount of time between each iteration, represented by dt.
+
 ```
 tf = 365*24*3600 # iterating for 1 year in units of seconds (s)
 dt =  tf/1000 # Amount of time between iterations, set such that there ar 1000 iterations
 test_system.iterate(tf,dt) # running the iterate method, positions and velocities are sotred within each star object
 ```
 
-This 
+The actual values for the position and velocity over this time interval are stored within the star objects. Therefore, by accessing the star's position and velocity features (denoted by '.r' and '.v'), we can evalueate their motion. In the following cell, we plot out the path of the star as it orbits the black hole using the star's position feature.
 
 ```
 plt.figure(figsize = (8,8))
@@ -98,4 +101,51 @@ ylim = 1.6e11
 test_system.plot(xlim, ylim, tf, dt)
 ```
 We would show the animation here. However, due to the limitations of markdown, we are unable to do so. To view this animation, with all the previous code blocks, one can go to the 2D_orbit_simulation directory to view both this example code, as well as the code we wrote using this software to simulate the orbits for Sag A.
+
+### 3D Model
+
+For the simulation of these orbits in the three-dimensional plane, there were quite a few things that needed to be changed. First and foremost, we changed how the iterate function would create the vectors for velocity and position. We added an additional column that would store the Z direction of velocity and the Z posiiton that the star is located. This allows us to have 3D aspects of the start to animate and update. The second thing we had to change was the plot function. This is due to the fact that the one written before was for a two-dimensional space. Adding 3D plotting and animation functionality was actually not that difficult. We found and used the projection 3D argument in the matplotlib axes instantiation function. Then, we used a loop that would plot the star's 3D position at a certain point in time, then set the axes of the plot. After this, the plot was displayed and the kernel is slept for a certain amount of time. The plots axes are then cleared and the output from the cell is cleared so that the next iteration of the function can run and redraw a plot, in a way that simulates and acts like an animation. 
+
+Like in the 2D model, we will be showing a demo of the 3D animation using test data that is a modified version of an Earth-Sun system. 
+
+We import the same libraries as with the 2D model, but this time, importing the system3d class to create our simulation in 3 dimensions
+```
+import matplotlib.pyplot as plt
+%matplotlib inline
+import numpy as np
+from system import system3d, star
+```
+
+These are proxy starts that will be a part of our orbit. Currently, they are assigned values similar to that in the example code of the 2-d simulation, except now the orbital path is now tilted by 20 degrees.
+
+The tilt of a star's orbit with respect to a reference plane is known as the **inclanation (i)** of the star's orbit. We will be seeing quite a bit of this throughout the rest of this section.
+
+Like in the 2D model, we start by initializing our star objects. Since they're set to take in initial position and velocity vectors of arbitrary lengths. All we need to do is input 3D initial position and velocity vectors
+```
+# creating the star object, picked initial conditions that have the same
+
+test_star_3d = star([1.5e11*np.cos(20*np.pi/180),0,1.5e11*np.sin(20*np.pi/180)],[0,2.98e4,0])
+
+test_list_3d = [test_star_3d]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
