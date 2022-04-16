@@ -34,7 +34,6 @@ class star:
 
 #         self.mass = mass # might not need since black hole is so massive
 
-# +
 class system2d:
     '''
     2d simulation of astronomical bodies orbiting around a large central mass 
@@ -167,8 +166,16 @@ class system2d:
             plt.legend()
             
         
-        
-# -
+    def Residuals(self,star_list,label):
+        """Finds the diffrence between the escape velocity from the black hole and the inital velocity of the star"""
+        G = 6.67e-11
+        for i in range(len(star_list)):
+            rad = star_list[i].r0[0]
+            vel = star_list[i].v0[1]
+            EVE = np.sqrt(2*G*self.M/rad)
+            res = vel-EVE
+            print("The residual for",label[i],"is",res)
+
 
 class system3d:
     
