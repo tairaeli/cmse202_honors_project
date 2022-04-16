@@ -22,7 +22,9 @@ The differential equation we will be solving is denoted by: $$a(r) = \frac{GM_sr
 
 To obtain these initial conditions, we decided to use the **q (AU)** column for position and the  **v(%c)** column for velocity. **q (AU)** represents the distance of the star from the black hole at its **perhilion**, the closest point to the black hole in the star's orbital path. This distance is measured in **AU** or **Astronomical Units**, which represent the distance from Earth to the Sun (i.e., the distance from Earth to the Sun is 1 AU or ~1.5e11 m). However, for this project we will be working in SI units, so this will be converted into meters. **v(%c)** represents the speed of the star at this perhilion location. This is units of **%c** where 'c' represents the speed of light at $3*10^8$ m/s. We will also be using this in SI units as well (m/s).
 
-## Methodology
+## How the Model Works
+
+### 2D Model
 
 In the process of making an accurate model for the Sag A system, we decided that it would be best to first start out with a simpler model of our system in a lower dimension to ensure that the basics of our model are functioning as they should before we add any more complexity to our model. Therefore, we will first try to build our model in 2 dimensions.
 
@@ -43,6 +45,35 @@ from system import star, system2d
 
 Now we are able to run our basic simulation.
 
+To begin, we must first by initializing our objects for the model, starting with the 'star' objects. The only arguments required for these objects are the initial position and velocity of the star, in meters and meters/second respectively
+```
+r0 = [1.5e11,0] # in units of meters(m), represents the initial position in [x,y]
+v0 = [0,2.98e4] # in units of meters per second (m/s), represents the initial velocity in [v_x,v_y]
+
+test_star = star(r0,v0) # creates a star object with an initial velocity and position
+```
+
+Next we initialize our system. The arguments for this object are slightly more complex. Here we require several different arguments: The mass of the central black hole (in kg) and a list of star objects
+```
+black_hole_mass = 2e30 # in kilograms (kg)
+
+test_list = [test_star] # system2d class takes in a list of star objects as an argument 
+                        # can be any non-zero length in size 
+                        # must only compose of star objects
+
+test_system = system2d(test_list,black_hole_mass) # creates a 2d system object using the 
+                                                  # star list and the mass of the central black hole
+
+```
+
+```
+tf = 365*24*3600 # iterating for 1 year in units of seconds (s)
+dt =  tf/1000 # Amount of time between iterations, set such that there ar 1000 iterations
+test_system.iterate(tf,dt) # running the iterate method, positions and velocities are sotred within each star object
+```
+
+This 
+
 ```
 plt.figure(figsize = (8,8))
 plt.plot(test_star.r[:,0],test_star.r[:,1], label = "Star Orbit")
@@ -55,4 +86,16 @@ plt.legend()
 
 This should output a plot that is something like:
 
-![](./images/exposplot.jpg)
+<img src="https://github.com/tairaeli/cmse202_honors_project/blob/master/images/exposplot.jpg" width="400" height="400">
+
+As a built-in method in our system2d class, we have a function for displaying an animation of our star objects as they orbit the black hole called '.plot()' which takes in a single value for the x-bounds and another value for the y-bounds. Like the '.iterate()' function, it also takes in a final time and timestep size argument to determine how long we want the animation to run for and how smooth we want the animation to be. These values can be determined independently of the '.iterate()', but they must still be in units of seconds.
+
+To create an animation of the prior example:
+```
+xlim = 1.6e11
+ylim = 1.6e11
+
+test_system.plot(xlim, ylim, tf, dt)
+```
+We would show the animation here. However, due to the limitations of markdown, we are unable to do so. To view this animation, with all the previous code blocks, one can go to the 2D_orbit_simulation directory to view both this example code, as well as the code we wrote using this software to simulate the orbits for Sag A.
+
