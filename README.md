@@ -25,6 +25,49 @@ To obtain these initial conditions, we decided to use the **q (AU)** column for 
 
 ## How the Model Works
 
+### Escape velocities
+
+Before we plot the orbits we need to figure out whether the stars follow newtonian mechanics and dont rely on realtavistic effects. What that means is that our code can only support certain velocity thresholds and anything above that will cause the code to break. 
+
+The way we do this is by making functions of the system2D file that calculates the Escape velocity and plots the stars on it and finally finds whether they lie abouve or below the escape velocity of the black hole.
+
+First we need to initialize the stars that are orbiting the black hole.
+```
+SA = star(Inital position A, Initial velocity A) 
+SB = star(Inital position B, Initial velocity B) 
+```
+Then we need to figure out the escape velocity from the Black hole as a function of distance from the black hole. The labels help with labeling the stars on the plot.
+```
+star_list=[SA,SB]
+plt.figure(figsize=(9,6))
+test_system.Escape_velocity(star_list)
+labels= ["SA","SB"]
+test_system.ScatterStars(star_list,labels)
+
+```
+For our example we used stars around sagitarius A. Here is what our plot looks like.
+![image](https://user-images.githubusercontent.com/91364468/163688200-be67b80f-d569-42ed-b603-73f673f3d81e.png)
+
+Finally we need to see if the initial velocity of the stars is above or below the escape velocity thus you need to calculate the residuals.
+
+```
+test_system.Residuals(star_list,labels)
+```
+which should give you something like this.
+```
+The residual for s1 is -167020.70258297282
+The residual for s2 is -82136.225303608
+The residual for s8 is -98516.08981197374
+The residual for s12 is -42759.256721738726
+The residual for s13 is -326604.1863571396
+The residual for s14 is 203400.93013891205
+The residual for s16 is 233799.77611472458
+The residual for s4714 is 205759.93473405018
+```
+If the value is positive it means that the star does not follow Newtonian Mechanics and will therefore not be applicable to our model.
+
+Looking at the escape velocities, we find that stars: s14, s16 and s4714 are not applicable for our model, so we will not be including them in our analysis.
+
 ### 2D Model
 
 In the process of making an accurate model for the Sag A system, we decided that it would be best to first start out with a simpler model of our system in a lower dimension to ensure that the basics of our model are functioning as they should before we add any more complexity to our model. Therefore, we will first try to build our model in 2 dimensions.
@@ -101,6 +144,8 @@ ylim = 1.6e11
 test_system.plot(xlim, ylim, tf, dt)
 ```
 We would show the animation here. However, due to the limitations of markdown, we are unable to do so. To view this animation, with all the previous code blocks, one can go to the 2D_orbit_simulation directory to view both this example code, as well as the code we wrote using this software to simulate the orbits for Sag A.
+
+
 
 ### 3D Model
 
