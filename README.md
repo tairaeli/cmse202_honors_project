@@ -172,12 +172,35 @@ Like in the 2D model, we start by initializing our star objects. Since they're s
 test_star_3d = star([1.5e11*np.cos(20*np.pi/180),0,1.5e11*np.sin(20*np.pi/180)],[0,2.98e4,0])
 
 test_list_3d = [test_star_3d]
+
+M = 2e30 # setting initial mass for our central mass
+
+test_system = system3d(test_list_3d, M)
 ```
 
+Now, we run the '.iterate()' function to set the stars into orbit around the central mass
+```
+tf = 365*24*3600 # iterating for 1 year in units of seconds (s)
+dt = tf/1000 # Amount of time between iterations, set such that there ar 1000 iterations
 
+test_system.iterate(tf,dt)
+```
 
+Next we plot the data to evaluate the functionality of our model
+```
+ax = plt.axes(projection='3d')
+for i in range(len(test_list_3d)):
+    ax.plot(test_list_3d[i].r[:,0],test_list_3d[i].r[:,1],test_list_3d[i].r[:,2])
+    ax.scatter(0,0, color = "black", marker = "o")
+    ax.set_xlabel("X Position (m)")
+    ax.set_ylabel("Y Position (m)")
+    ax.set_zlabel("Z Position (m)")
+    ax.set_title("Simple Stellar Orbit in 2D")
+```
 
+This should output a plot that is something like:
 
+<img src="https://github.com/tairaeli/cmse202_honors_project/blob/master/images/3dtestplot.jpg" width="400" height="400">
 
 
 
