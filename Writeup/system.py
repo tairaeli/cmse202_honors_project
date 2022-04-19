@@ -135,8 +135,8 @@ class system2d:
                 
             ax.scatter(0,0,color = "black", marker = "o")
                 
-            ax.set_xlim([-xlim,xlim])
-            ax.set_ylim([-ylim,ylim])
+            ax.set_xlim(xlim)
+            ax.set_ylim(ylim)
             
             display(fig)
 
