@@ -115,7 +115,7 @@ Now it is finally time to put our planet into orbit. We will now run the '.itera
 ```
 tf = 365*24*3600 # iterating for 1 year in units of seconds (s)
 dt =  tf/1000 # Amount of time between iterations, set such that there ar 1000 iterations
-test_system.iterate(tf,dt) # running the iterate method, positions and velocities are sotred within each star object
+test_system.iterate(tf,dt) # running the iterate method, positions and velocities are sotred within each star object # Running the Velocity-Verlet Method
 ```
 
 The actual values for the position and velocity over this time interval are stored within the star objects. Therefore, by accessing the star's position and velocity features (denoted by '.r' and '.v'), we can evalueate their motion. In the following cell, we plot out the path of the star as it orbits the black hole using the star's position feature.
@@ -138,13 +138,12 @@ As a built-in method in our system2d class, we have a function for displaying an
 
 To create an animation of the prior example, we use the '.plot()' method. This method takes in values of x bounds and y bounds for the plot (in meters) denoted by 'xlim' and 'ylim' that determine the size of the animation frame. This method also takes in 'tf' and 'dt' arguments that determine the length of time the animation takes as well as the amount of time that passes between each animation frame respecively
 ```
-xlim = 1.6e11 # setting x bounds of plot
-ylim = 1.6e11 # seting y bounds of plot
+xlim = [-1.6e11,1.6e11] # seting x bounds of plot
+ylim = [-1.6e11,1.6e11] # seting y bounds of plot
 
 test_system.plot(xlim, ylim, tf, dt)
 ```
 We would show the animation here. However, due to the limitations of markdown, we are unable to do so. To view this animation, with all the previous code blocks, one can go to the 2D_orbit_simulation directory to view both this example code, as well as the code we wrote using this software to simulate the orbits for Sag A.
-
 
 
 ### 3D Model
@@ -183,6 +182,7 @@ Now, we run the '.iterate()' function to set the stars into orbit around the cen
 tf = 365*24*3600 # iterating for 1 year in units of seconds (s)
 dt = tf/1000 # Amount of time between iterations, set such that there ar 1000 iterations
 
+# Running the Velocity-Verlet Method
 test_system.iterate(tf,dt)
 ```
 
@@ -202,17 +202,17 @@ This should output a plot that is something like:
 
 <img src="https://github.com/tairaeli/cmse202_honors_project/blob/master/images/3dtestplot.jpg" width="400" height="400">
 
-This line of code will run the animation. The animation runs in a small zoomed in area of the plot, since allowing the axis limits to be what is apparent on the graph above will cause for almost no change in the position of the stars. 
+This line of code will run the animation. Like in the 2D simulation, we set . 
 
 ```
-# plotting the 3D model
-xlim = 1.5e11 # setting x-limits on 
-ylim = 1.5e11
-zlim = 4e10
-test_system.plot([-xlim,xlim],[-ylim,ylim],[-ylim,ylim], tf, dt)
+# Animating the 3D model
+xlim = [-1.6e11,1.6e11] # seting x bounds of plot
+ylim = [-1.6e11,1.6e11] # seting y bounds of plot
+zlim = [-4e10,4e10] # seting z bounds of plot
+test_system.plot(xlim,ylim,zlim, tf, dt)
 ```
 
-
+Again, to see these animations, they must be run within the Jupyter notebooks located within this repository
 
 
 

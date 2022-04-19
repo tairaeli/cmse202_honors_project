@@ -98,7 +98,7 @@ class system2d:
                 a_new = -G*self.M/(rabs_new**3)*star.r[i+1]
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
                 
-            print("Data Instantiation Finished")
+        print("Data Instantiation Finished")
             
     def plot(self, xlim, ylim, tf, dt):
         '''
