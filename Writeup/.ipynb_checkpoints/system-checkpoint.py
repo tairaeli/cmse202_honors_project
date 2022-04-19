@@ -18,10 +18,10 @@ class star:
             Must have same dimensions in r0
         
         r: list of positions stored inside of object
-            defined in the iterate() method of either system class
+           values defined in the iterate() method of either system class
         
         v: list of velocities stored inside of object
-           also defined in the iterate() method of either class
+           values also defined in the iterate() method of either class
     '''
     
     def __init__(self, r0, v0):
@@ -40,7 +40,10 @@ class system2d:
     attributes:
         
         star_list : star
-            list of star objects that will be orbiting around the system
+            list of star objects that will be orbiting around the central mass
+        
+        M : float
+            Mass of central black hole for which all other stars orbit around
     
     methods:
         
@@ -95,7 +98,7 @@ class system2d:
                 a_new = -G*self.M/(rabs_new**3)*star.r[i+1]
                 star.v[i+1] = star.v[i] + dt/2*(a_new+a)
                 
-            print("Data Instantiation Finished")
+        print("Data Instantiation Finished")
             
     def plot(self, xlim, ylim, tf, dt):
         '''
@@ -145,20 +148,17 @@ class system2d:
 
 
 class system3d:
-    
-    def __init__(self, star_list, M):
-        
-        self.star_list = star_list
-        self.M = M
-        
     '''
     3d simulation of astronomical bodies orbiting around a large central mass 
     
     attributes:
         
         star_list : star
-            list of star objects that will be orbiting around the system
-    
+            list of star objects that will be orbiting around the central mass
+
+        M : float
+            Mass of central black hole for which all other stars orbit around
+
     methods:
         
         iterate : 
@@ -170,6 +170,9 @@ class system3d:
             the star objects
         
     ''' 
+    def __init__(self, star_list, M):
+        self.star_list = star_list
+        self.M = M
         
     def iterate(self,tfinal,dt):
         '''
@@ -224,7 +227,10 @@ class system3d:
             
             ylim: list
                 the y bounds of the plot
-            
+
+            zlim: list
+                the z bounds of the plot
+
             tf : float
                 length of time at which we want to iterate over (in seconds)
             
