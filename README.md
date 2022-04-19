@@ -136,10 +136,10 @@ This should output a plot that is something like:
 
 As a built-in method in our system2d class, we have a function for displaying an animation of our star objects as they orbit the black hole called '.plot()' which takes in a single value for the x-bounds and another value for the y-bounds. Like the '.iterate()' function, it also takes in a final time and timestep size argument to determine how long we want the animation to run for and how smooth we want the animation to be. These values can be determined independently of the '.iterate()', but they must still be in units of seconds.
 
-To create an animation of the prior example:
+To create an animation of the prior example, we use the '.plot()' method. This method takes in values of x bounds and y bounds for the plot (in meters) denoted by 'xlim' and 'ylim' that determine the size of the animation frame. This method also takes in 'tf' and 'dt' arguments that determine the length of time the animation takes as well as the amount of time that passes between each animation frame respecively
 ```
-xlim = 1.6e11
-ylim = 1.6e11
+xlim = 1.6e11 # setting x bounds of plot
+ylim = 1.6e11 # seting y bounds of plot
 
 test_system.plot(xlim, ylim, tf, dt)
 ```
@@ -202,7 +202,15 @@ This should output a plot that is something like:
 
 <img src="https://github.com/tairaeli/cmse202_honors_project/blob/master/images/3dtestplot.jpg" width="400" height="400">
 
+This line of code will run the animation. The animation runs in a small zoomed in area of the plot, since allowing the axis limits to be what is apparent on the graph above will cause for almost no change in the position of the stars. 
 
+```
+# plotting the 3D model
+xlim = 1.5e11 # setting x-limits on 
+ylim = 1.5e11
+zlim = 4e10
+test_system.plot([-xlim,xlim],[-ylim,ylim],[-ylim,ylim], tf, dt)
+```
 
 
 
