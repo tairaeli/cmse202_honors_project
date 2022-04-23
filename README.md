@@ -25,7 +25,7 @@ To obtain these initial conditions, we decided to use the **q (AU)** column for 
 
 ## How the Model Works
 
-### Escape velocities
+### Escape velocities - Ari
 
 Before we plot the orbits we need to figure out whether the stars follow newtonian mechanics and dont rely on realtavistic effects. What that means is that our code can only support certain velocity thresholds and anything above that will cause the code to break. 
 
@@ -68,7 +68,7 @@ If the value is positive it means that the star does not follow Newtonian Mechan
 
 Looking at the escape velocities, we find that stars: s14, s16 and s4714 are not applicable for our model, so we will not be including them in our analysis.
 
-### 2D Model
+### 2D Model - Elias & Nate
 
 In the process of making an accurate model for the Sag A system, we decided that it would be best to first start out with a simpler model of our system in a lower dimension to ensure that the basics of our model are functioning as they should before we add any more complexity to our model. Therefore, we will first try to build our model in 2 dimensions.
 
@@ -146,7 +146,7 @@ test_system.plot(xlim, ylim, tf, dt)
 We would show the animation here. However, due to the limitations of markdown, we are unable to do so. To view this animation, with all the previous code blocks, one can go to the 2D_orbit_simulation directory to view both this example code, as well as the code we wrote using this software to simulate the orbits for Sag A.
 
 
-### 3D Model
+### 3D Model - Elias & Nate
 
 For the simulation of these orbits in the three-dimensional plane, there were quite a few things that needed to be changed. First and foremost, we changed how the iterate function would create the vectors for velocity and position. We added an additional column that would store the Z direction of velocity and the Z posiiton that the star is located. This allows us to have 3D aspects of the start to animate and update. The second thing we had to change was the plot function. This is due to the fact that the one written before was for a two-dimensional space. Adding 3D plotting and animation functionality was actually not that difficult. We found and used the projection 3D argument in the matplotlib axes instantiation function. Then, we used a loop that would plot the star's 3D position at a certain point in time, then set the axes of the plot. After this, the plot was displayed and the kernel is slept for a certain amount of time. The plots axes are then cleared and the output from the cell is cleared so that the next iteration of the function can run and redraw a plot, in a way that simulates and acts like an animation. 
 
