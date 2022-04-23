@@ -32,6 +32,7 @@ class star:
             self.r = None
             
             self.v = None
+            
 
 class system2d:
     '''
@@ -146,7 +147,57 @@ class system2d:
 
             clear_output(wait=True) 
 
+    def Escape_velocity(self,starlist):
+        """Find the escape velocity of star and plot it as a function of distance
+        **We will assume the radius of the star is a point**
+        starlist: list of star objects to find array of distance to find
+       
+        """
+        G = 6.67e-11
+        disi=np.inf
+        disf=0
+        for star in starlist:
+            rads = np.sqrt((star.r0[0])**2+(star.r0[1])**2)
+            if rads <= disi:
+                disi = rads-rads*0.8
+            if rads >= disf:
+                disf = rads+rads*0.1
+        
+        self.dis=np.linspace(disi,disf,1000)
+        
+        self.EV = np.sqrt(2*G*self.M/self.dis)
+        plt.plot(self.dis,self.EV)
+        plt.title("Escape velocity as a function of distance| Mass= "+str(self.M),y=1.05)
+        plt.ylabel("Escape Velocity (m/s)")
+        plt.xlabel("distance to black hole (m)")
+      
+        
+    def ScatterStars(self,star_list,label):
+        """Plots the Stars of our choice on a plot.
+        star_list= list of star objets
+        """
+        G = 6.67e-11
+        for i in range(len(star_list)):
+            rad = np.sqrt((star_list[i].r0[0])**2+(star_list[i].r0[1])**2)
+            vel = np.sqrt((star_list[i].v0[0])**2+(star_list[i].v0[1])**2)
+            plt.scatter(rad,vel,label=str(label[i]))
+            plt.title("Escape velocity as a function of distance| Mass= "+str(self.M))
+            plt.ylabel("Escape Velocity (m/s)")
+            plt.xlabel("distance to black hole (m)")
+            plt.legend()
+            
+        
+    def Residuals(self,star_list,label):
+        """Finds the diffrence between the escape velocity from the black hole and the inital velocity of the star"""
+        G = 6.67e-11
+        for i in range(len(star_list)):
+            rad = star_list[i].r0[0]
+            vel = star_list[i].v0[1]
+            EVE = np.sqrt(2*G*self.M/rad)
+            res = vel-EVE
+            print("The residual for",label[i],"is",res)
 
+            
 class system3d:
     '''
     3d simulation of astronomical bodies orbiting around a large central mass 
