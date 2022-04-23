@@ -143,7 +143,7 @@ ylim = [-1.6e11,1.6e11] # seting y bounds of plot
 
 test_system.plot(xlim, ylim, tf, dt)
 ```
-We would show the animation here. However, due to the limitations of markdown, we are unable to do so. To view this animation, with all the previous code blocks, one can go to the 2D_orbit_simulation directory to view both this example code, as well as the code we wrote using this software to simulate the orbits for Sag A.
+We would show the animation here. However, due to the limitations of markdown, we are unable to do so. To view this animation, with all the previous code blocks, one can go to the Writeup directory to view both this example code, as well as the code we wrote using this software to simulate the orbits for Sag A.
 
 
 ### 3D Model - Elias & Nate
@@ -212,7 +212,7 @@ zlim = [-4e10,4e10] # seting z bounds of plot
 test_system.plot(xlim,ylim,zlim, tf, dt)
 ```
 
-Again, to see these animations, they must be run within the Jupyter notebooks located within this repository
+Again, to see these animations, they must be run within the Jupyter notebooks located within this repository, specifically, within the Writeup folder
 
 
 
